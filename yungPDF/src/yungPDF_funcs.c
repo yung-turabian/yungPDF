@@ -34,22 +34,25 @@ DocumentCatalog* _initDocumentCatalog(PDF* pdf)
 	DocumentCatalog* catalog;
 	catalog = (DocumentCatalog*)malloc(sizeof(DocumentCatalog));
 
-	if(pdf->PageTreeRoot == NULL) 
+	if(pdf->PageTreeRoot == NULL)
 	{
 		fprintf(stdout, "[yungpdf] PagesRoot not created yet, doing so now...\n");
 		_initPagesTree(pdf);
 	}
 	catalog->RootNode = pdf->PageTreeRoot;
+	
+	catalog->Reference = ++pdf->ObjCount;
+	pdf->DocumentCatalog = catalog;
 
 
-	beginobj(pdf, 10);
+	beginobj(pdf, catalog->Reference);
 	//insert(pdf->references, "DocumentCatalog", genRef(pdf));
 	char *toWrite = 
 			"<< "
 			"/Type %s "
 			"/Pages %s "
 			"/PageLayout /SinglePage >>";
-	fprintf(pdf->stream, toWrite, "/Catalog", get(pdf->references, "PagesRoot"));
+	fprintf(pdf->stream, toWrite, "/Catalog", genRef(pdf->PageTreeRoot->Reference));
 	endobj(pdf);
 	updateOffsets(pdf);
 	return catalog;

@@ -57,6 +57,7 @@ typedef struct PageNode PageNode;
 typedef struct DocumentCatalog {
 		u8 Offset;
 		const char* Type;
+		i8 Reference;
 		
 		PageNode* RootNode;
 		// /PageLabels numbertree

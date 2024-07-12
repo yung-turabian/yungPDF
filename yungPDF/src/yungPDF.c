@@ -49,8 +49,6 @@ PDF* pdfInit() {
 
 		PageNode* node1 = pdfCreatePageNode(pdf, root);
 		PageNode* node2 = pdfCreatePageNode(pdf, root);
-		
-		//PageNode* node3 = pdfCreatePageNode(pdf, node2);
 
 		pdfCreatePage(pdf, root);
 		pdfCreatePage(pdf, node1);
@@ -60,8 +58,6 @@ PDF* pdfInit() {
 		pdfCreatePage(pdf, node2);
 		pdfCreatePage(pdf, node2);
 		pdfCreatePage(pdf, node2);
-
-		//pdfWritePageNode(pdf, node3);
 
 		DFSTraverse(pdf, root);
 
@@ -96,10 +92,11 @@ PDF* pdfInit() {
 		fprintf(pdf->stream, "endobj\n");
 		*/
 		//pdfCreateContentStream(pdf);
-		//pdfAddPage(pdf, 0);
-		//pdfSetMetadata(pdf, "test", "Henry", "Testing", "idk");
-		//pdfCreateXRef(pdf);
-		//pdfCreateTrailer(pdf);
+
+
+		pdfSetMetadata(pdf, "test", "Henry", "Testing", "idk");
+		pdfCreateXRef(pdf);
+		pdfCreateTrailer(pdf);
 
 		//pdfFlush(pdf);
 
@@ -304,7 +301,7 @@ void pdfCreateTrailer(PDF* pdf)
 		fprintf(pdf->stream, 
 						"<< /Size %d \n/Info << /Title (%s) /Author (%s) /Subject(%s) /Keywords (%s) >>\n/Root %s \n>>\n", 
 						pdf->ObjCount + 1, pdf->trailer.title, pdf->trailer.author, pdf->trailer.subject, 
-						pdf->trailer.keywords, get(pdf->references, "DocumentCatalog"));
+						pdf->trailer.keywords, genRef(pdf->DocumentCatalog->Reference));
 		fprintf(pdf->stream, "startxref\n");
 		fprintf(pdf->stream, "%u\n", pdf->Offsets[pdf->XRef.offset]);
 		fprintf(pdf->stream, "\%%\%%EOF\n");
