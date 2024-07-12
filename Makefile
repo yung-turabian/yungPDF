@@ -1,7 +1,7 @@
 CC=clang
 DEPS=
 
-SRCS=main.c queue.c yungPDF/src/*.c yung_markdown.c map.c
+SRCS= src/*.c yungPDF/src/*.c
 LIBS= -lxtra
 
 TARGET=parser

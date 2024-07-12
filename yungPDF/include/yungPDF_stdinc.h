@@ -11,7 +11,7 @@
 #define YUNGPDFSTDINC_H
 
 #include <xtra.h>
-#include "../../map.h"
+#include "../../src/map.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

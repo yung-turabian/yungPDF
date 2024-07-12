@@ -42,8 +42,9 @@ PDF* pdfInit() {
 				return NULL;
 		}
 
+		
 		fprintf(pdf->stream, "\%%PDF->%.6g\n%s\n", pdf->Version, pdf->FTPHeader);
-
+		
 		PageNode* root = _initPagesTree(pdf);
 		DocumentCatalog* catalog = _initDocumentCatalog(pdf);
 
@@ -62,8 +63,6 @@ PDF* pdfInit() {
 		DFSTraverse(pdf, root);
 
 		
-		//pdfWrite(pdf);
-
 
 		//testing
 		Font font;
@@ -90,17 +89,17 @@ PDF* pdfInit() {
 		fprintf(pdf->stream, "stream\n");
 		fprintf(pdf->stream, "endstream\n");
 		fprintf(pdf->stream, "endobj\n");
-		*/
+		
 		//pdfCreateContentStream(pdf);
 
-
+		*/
 		pdfSetMetadata(pdf, "test", "Henry", "Testing", "idk");
 		pdfCreateXRef(pdf);
 		pdfCreateTrailer(pdf);
 
 		//pdfFlush(pdf);
+		
 
-		printmap(pdf->references);
 		return pdf;
 }
 

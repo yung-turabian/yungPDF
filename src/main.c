@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <string.h>
-#include <ctype.h>
 
 #include "yung_markdown.h"
-#include "yungPDF/include/yungPDF.h"
+#include "../yungPDF/include/yungPDF.h"
 
 #include <xtra/rand.h>
 #include "queue.h"
@@ -20,16 +19,16 @@ queue* tokenize(FILE* file);
 int fcounts(FILE *stream);
 
 int main() {
-	const char* filename = "test.md";
+	const char* filename = "Examples/test.md";
 
-	rng(0, 10);
-	char * str = rands(10);
-	printf("%s\n", str);
-	free(str);
+	//rng(0, 10);
+	//char * str = rands(10);
+	//printf("%s\n", str);
+	//free(str);
 
 	FILE* file = fopen(filename, "r");
 	if(file==NULL) {
-		fprintf(stdout, "[io] file can't be opened\n");
+		fprintf(stdout, "[io] file can't be opened: %s\n", filename);
 		return 1;
 	} else {
 		fprintf(stdout, "[io] parsing %s\n", filename); 
