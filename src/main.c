@@ -42,10 +42,9 @@ int main() {
 	
 	PDF *pdf = pdfInit();
 
-
-
 	destroyQueue(&Tokens);
-	//pdfDestroy(&pdf);
+	printf("debu\n");
+	pdfDestroy(&pdf);
 	return 0;
 }
 

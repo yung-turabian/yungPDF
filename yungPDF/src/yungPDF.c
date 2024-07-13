@@ -6,7 +6,7 @@
  * 	
  *
  *
- *
+ *	TODO, work thru valgrind errors and fix memory leaks
  *
  *
  *
@@ -315,28 +315,28 @@ void pdfEmpty(PDF *pdf)
 
 		if(pdf->stream != NULL && fclose(pdf->stream) == 0) 
 		{
-				printf("[yung_pdf ~io] closed properly ✅\n");
 				pdf->stream = NULL;
+				printf("[~yungPDF io] stream closed\n");
 		}
 
 		if(pdf->Offsets != NULL) 
 		{
 				free(pdf->Offsets);
 				pdf->Offsets = NULL;
+				printf("[~yungPDF] offsets freed\n");
 		}
-
-		killSMap(pdf->references);
 }
 
 void pdfDestroy(PDF **pdf) 
 {
 		if(pdf == NULL) 
 		{
-				printf("[xtra-pdf] pdf-obj most likely already killed\n");
+				printf("[yungPDF] pdf-obj most likely already killed\n");
 				return;
 		}
 		pdfEmpty(*pdf);
 
 		free(*pdf);
 		*pdf = NULL;
+		printf("[~yungPDF] everything is closed & freed ✅\n");
 }
